@@ -1,5 +1,5 @@
 
-import { StyleSheet, Text, View } from 'react-native';
+import { KeyboardAvoidingView, Platform } from 'react-native';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { store } from './store';
@@ -17,8 +17,10 @@ export default function App() {
 
       <NavigationContainer>
       <SafeAreaProvider>
-
-        <Stack.Navigator>
+          <KeyboardAvoidingView 
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          style={{ flex: 1}}>
+          <Stack.Navigator>
           <Stack.Screen
           name='HomeScreen'
           component={HomeScreen}
@@ -34,6 +36,8 @@ export default function App() {
             }}
             />
         </Stack.Navigator>
+          </KeyboardAvoidingView>
+        
       
       </SafeAreaProvider>
       </NavigationContainer>
@@ -43,11 +47,4 @@ export default function App() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'red',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+
